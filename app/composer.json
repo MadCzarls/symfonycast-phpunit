@@ -1,7 +1,7 @@
 {
-    "name": "madczarls/symfony-docker",
+    "name": "madczarls/symfonycast-phpunit",
     "type": "project",
-    "description": "Base project template for PHP + Symfony + Nginx + MySQL",
+    "description": "Following https://symfonycasts.com/screencast/phpunit but on Symfony 5.3 and PHPUnit 9.5.",
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
