@@ -75,7 +75,7 @@ class DinosaurFactoryTest extends TestCase
     }
 
     /**
-     * @return string[]
+     * @return mixed[][]
      */
     public function getSpecificationTests(): array
     {
@@ -88,7 +88,7 @@ class DinosaurFactoryTest extends TestCase
     }
 
     /**
-     * @return string[]
+     * @return string[][]
      */
     public function getHugeDinosaurSpecTests(): array
     {

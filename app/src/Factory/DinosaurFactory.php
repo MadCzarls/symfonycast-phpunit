@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Factory;
 
 use App\Entity\Dinosaur;
+use App\Service\DinosaurLengthDeterminator;
 use Exception;
 
 use function array_key_exists;
@@ -15,6 +16,13 @@ use function strtolower;
 
 class DinosaurFactory
 {
+    private DinosaurLengthDeterminator $lengthDeterminator;
+
+    public function __construct(DinosaurLengthDeterminator $lengthDeterminator)
+    {
+        $this->lengthDeterminator = $lengthDeterminator;
+    }
+
     public function growVelociraptor(int $length): Dinosaur
     {
         return $this->createDinosaur('Velociraptor', true, $length);
@@ -27,7 +35,7 @@ class DinosaurFactory
     {
         //defaults
         $codeName = 'InG-' . random_int(1, 99999);
-        $length = $this->getLengthFromSpecification($specification);
+        $length = $this->lengthDeterminator->getLengthFromSpecification($specification);
         $isCarnivorous = false;
 
         if (stripos($specification, 'carnivorous') !== false) {
