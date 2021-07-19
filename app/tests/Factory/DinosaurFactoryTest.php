@@ -7,6 +7,7 @@ namespace App\Tests\Factory;
 use App\Entity\Dinosaur;
 use App\Factory\DinosaurFactory;
 use App\Service\DinosaurLengthDeterminator;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 use function class_exists;
@@ -15,12 +16,13 @@ use function is_string;
 class DinosaurFactoryTest extends TestCase
 {
     private DinosaurFactory $factory;
+    private Stub|DinosaurLengthDeterminator $lengthDeterminator;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $lengthDeterminator = $this->createStub(DinosaurLengthDeterminator::class);
-        $this->factory = new DinosaurFactory($lengthDeterminator);
+        $this->lengthDeterminator = $this->createStub(DinosaurLengthDeterminator::class);
+        $this->factory = new DinosaurFactory($this->lengthDeterminator);
     }
 
     public function testItGrowsALargeVelociraptor(): void
@@ -54,9 +56,14 @@ class DinosaurFactoryTest extends TestCase
         string $specification,
         bool $expectedIsCarnivorous
     ): void {
+        $this->lengthDeterminator
+            ->method('getLengthFromSpecification')
+            ->willReturn(20);
+
         $dinosaur = $this->factory->growFromSpecification($specification);
 
         $this->assertSame($expectedIsCarnivorous, $dinosaur->isCarnivorous(), 'Dietes do not match');
+        $this->assertSame(20, $dinosaur->getLength());
     }
 
     /**
