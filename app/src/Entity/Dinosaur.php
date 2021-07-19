@@ -23,6 +23,8 @@ class Dinosaur
     private string $genus;
     /** @ORM\Column(type="boolean") */
     private bool $isCarnivorous;
+    /** @ORM\ManyToOne(targetEntity="Enclosure", inversedBy="dinosaurs") */
+    private ?Enclosure $enclosure = null;
 
     public function __construct(string $genus = 'Unknown', bool $isCarnivorous = false)
     {
