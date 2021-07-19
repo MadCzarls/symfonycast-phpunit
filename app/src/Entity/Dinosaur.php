@@ -14,6 +14,9 @@ use function sprintf;
  */
 class Dinosaur
 {
+    public const LARGE = 10;
+    public const HUGE = 30;
+
     /** @ORM\Column(type="integer") */
     private int $length = 0;
     /** @ORM\Column(type="string") */
