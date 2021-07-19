@@ -6,6 +6,7 @@ namespace App\Tests\Factory;
 
 use App\Entity\Dinosaur;
 use App\Factory\DinosaurFactory;
+use App\Service\DinosaurLengthDeterminator;
 use PHPUnit\Framework\TestCase;
 
 use function class_exists;
@@ -18,7 +19,8 @@ class DinosaurFactoryTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->factory = new DinosaurFactory();
+        $lengthDeterminator = $this->createStub(DinosaurLengthDeterminator::class);
+        $this->factory = new DinosaurFactory($lengthDeterminator);
     }
 
     public function testItGrowsALargeVelociraptor(): void
@@ -50,28 +52,11 @@ class DinosaurFactoryTest extends TestCase
      */
     public function testItGrowsADinosaurFromSpecification(
         string $specification,
-        bool $expectedIsLarge,
         bool $expectedIsCarnivorous
     ): void {
         $dinosaur = $this->factory->growFromSpecification($specification);
 
-        if ($expectedIsLarge) {
-            $this->assertGreaterThanOrEqual(Dinosaur::LARGE, $dinosaur->getLength());
-        } else {
-            $this->assertLessThan(Dinosaur::LARGE, $dinosaur->getLength());
-        }
-
         $this->assertSame($expectedIsCarnivorous, $dinosaur->isCarnivorous(), 'Dietes do not match');
-    }
-
-    /**
-     * @dataProvider getHugeDinosaurSpecTests
-     */
-    public function testItGrowsAHugeDinosaurFromSpecification(
-        string $specification,
-    ): void {
-        $dinosaur = $this->factory->growFromSpecification($specification);
-        $this->assertGreaterThanOrEqual(Dinosaur::HUGE, $dinosaur->getLength());
     }
 
     /**
@@ -79,25 +64,11 @@ class DinosaurFactoryTest extends TestCase
      */
     public function getSpecificationTests(): array
     {
-        //specification, is large, is carnivorous
+        //specification, is carnivorous
         return [
-            ['large carnivorous dinosaur', true, true],
-            ['give me all the cookies', false, false],
-            ['large herbivore', true, false],
-        ];
-    }
-
-    /**
-     * @return string[][]
-     */
-    public function getHugeDinosaurSpecTests(): array
-    {
-        return [
-            ['huge dinosaur'],
-            ['huge dino'],
-            ['huge'],
-            ['OMG'],
-            ['😱'],
+            ['large carnivorous dinosaur', true],
+            'default response' => ['give me all the cookies', false],
+            ['large herbivore', false],
         ];
     }
 }
