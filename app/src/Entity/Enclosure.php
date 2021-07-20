@@ -67,6 +67,11 @@ class Enclosure
         return $this->dinosaurs;
     }
 
+    public function getSecurities(): ArrayCollection|Collection
+    {
+        return $this->securities;
+    }
+
     public function isSecurityActive(): bool
     {
         foreach ($this->securities as $security) {
