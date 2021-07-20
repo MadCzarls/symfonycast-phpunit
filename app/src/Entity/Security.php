@@ -18,11 +18,14 @@ class Security
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
+
     /** @ORM\Column(type="string") */
     private string $name;
+
     /** @ORM\Column(type="boolean") */
     private bool $isActive;
-    /** @ORM\ManyToOne(targetEntity="AppBundle\Entity\Enclosure", inversedBy="securities") */
+
+    /** @ORM\ManyToOne(targetEntity="Enclosure", inversedBy="securities") */
     private Enclosure $enclosure;
 
     public function __construct(string $name, bool $isActive, Enclosure $enclosure)

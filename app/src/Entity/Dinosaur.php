@@ -17,12 +17,22 @@ class Dinosaur
     public const LARGE = 10;
     public const HUGE = 30;
 
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    private ?int $id = null;
+
     /** @ORM\Column(type="integer") */
     private int $length = 0;
+
     /** @ORM\Column(type="string") */
     private string $genus;
+
     /** @ORM\Column(type="boolean") */
     private bool $isCarnivorous;
+
     /** @ORM\ManyToOne(targetEntity="Enclosure", inversedBy="dinosaurs") */
     private ?Enclosure $enclosure = null;
 
