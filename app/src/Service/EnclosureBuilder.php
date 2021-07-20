@@ -33,6 +33,9 @@ class EnclosureBuilder
         $this->addSecuritySystems($numberOfSecuritySystems, $enclosure);
         $this->addDinosaurs($numberOfDinosaurs, $enclosure);
 
+        $this->entityManager->persist($enclosure);
+        $this->entityManager->flush();
+
         return $enclosure;
     }
 
