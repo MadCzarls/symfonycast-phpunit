@@ -53,4 +53,24 @@ class AppControllerTest extends WebTestCase
 
         $this->assertGreaterThan(0, $crawler->filter($selector)->count());
     }
+
+    public function testItGrowsADinosaurFromSpecification(): void
+    {
+        $this->databaseTool
+            ->loadFixtures([LoadBasicParkData::class, LoadSecurityData::class]);
+
+        $crawler = $this->client->request(Request::METHOD_GET, '/');
+        $this->client->followRedirects();
+        $form = $crawler->selectButton('Grow dinosaur')->form();
+
+        $form['enclosure']->select(3);
+        $form['specification']->setValue('large herbivore');
+
+        $this->client->submit($form);
+
+        $this->assertStringContainsString(
+            'Grew a large herbivore in enclosure #3',
+            $this->client->getResponse()->getContent()
+        );
+    }
 }
