@@ -2,6 +2,37 @@
 
 **Symfony 5 project following symfony cast tutorial for PHPUnit. https://symfonycasts.com/screencast/phpunit but on Symfony 5.3, PHPUnit 9.5 and PostgreSQL instead of MySQL/SQLite.**
 
+**Status: FINISHED**
+- [x] Chapter 1
+- [x] Chapter 2
+- [x] Chapter 3
+- [x] Chapter 4
+- [x] Chapter 5
+- [x] Chapter 6
+- [x] Chapter 7
+- [x] Chapter 8
+- [x] Chapter 9
+- [x] Chapter 10
+- [x] Chapter 11
+- [x] Chapter 12
+- [x] Chapter 13
+- [x] Chapter 14
+- [x] Chapter 15
+- [x] Chapter 16
+- [x] Chapter 17
+- [x] Chapter 18
+- [x] Chapter 19
+- [x] Chapter 20
+- [x] Chapter 21
+- [x] Chapter 22
+- [x] Chapter 23
+- [x] Chapter 24
+- [x] Chapter 25
+- [x] Chapter 26
+- [x] Chapter 27
+- [ ] Chapter 28 - concerns CI, omitted
+- [ ] Chapter 29 - concerns CI, omitted
+
 Running on Docker (utilizing docker-compose) with PHP 8.0 + nginx 1.18 + PostgreSQL. By default includes xdebug extension and PHP_CodeSniffer for easy development and basic configuration for opcache for production. Includes instruction for setting it in PhpStorm.
 
 - https://symfony.com/
