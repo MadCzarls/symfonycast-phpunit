@@ -60,7 +60,6 @@ class EnclosureBuilderIntegrationTest extends KernelTestCase
         $this->assertSame(3, $dinosaurCount, 'Amount of dinosaurs is not the same');
     }
 
-
     public function testItBuildsEnclosureWithDefaultSpecifications(): void
     {
         $container = static::getContainer();
