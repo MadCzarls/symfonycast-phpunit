@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
+use function sprintf;
+
 class AppControllerTest extends WebTestCase
 {
     use FixturesTrait;
@@ -41,5 +43,14 @@ class AppControllerTest extends WebTestCase
 
     public function testThereIsAnAlarmButtonForEnclosuresWithoutSecurity(): void
     {
+        $fixtures = $this->databaseTool
+            ->loadFixtures([LoadBasicParkData::class, LoadSecurityData::class])
+            ->getReferenceRepository();
+
+        $crawler = $this->client->request(Request::METHOD_GET, '/');
+        $enclosureWithoutActiveSecurity = $fixtures->getReference('carnivorous-enclosure');
+        $selector = sprintf('#enclosure-%d .button-alarm', $enclosureWithoutActiveSecurity->getId());
+
+        $this->assertGreaterThan(0, $crawler->filter($selector)->count());
     }
 }

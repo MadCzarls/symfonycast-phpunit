@@ -16,7 +16,6 @@ class AppController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(EntityManagerInterface $entityManager, EnclosureBuilder $enclosureBuilder): Response
     {
-//        $enclosureBuilder->buildEnclosure();
         $enclosures = $entityManager->getRepository(Enclosure::class)->findAll();
 
         return $this->render('test/index.html.twig', ['enclosures' => $enclosures]);
