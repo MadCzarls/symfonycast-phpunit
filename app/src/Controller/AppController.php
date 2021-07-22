@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Enclosure;
 use App\Service\EnclosureBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,16 +16,9 @@ class AppController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(EntityManagerInterface $entityManager, EnclosureBuilder $enclosureBuilder): Response
     {
-        dump($entityManager->getConfiguration());
+//        $enclosureBuilder->buildEnclosure();
+        $enclosures = $entityManager->getRepository(Enclosure::class)->findAll();
 
-        $enclosureBuilder->buildEnclosure();
-
-        $t = 1;
-        $t2 = 2;
-
-        return $this->render(
-            'test/index.html.twig',
-            ['controller_name' => 'AppController']
-        );
+        return $this->render('test/index.html.twig', ['enclosures' => $enclosures]);
     }
 }

@@ -43,11 +43,9 @@ class Enclosure
     {
         $this->dinosaurs = new ArrayCollection();
         $this->securities = new ArrayCollection();
-
         if (!$withBasicSecurity) {
             return;
         }
-
         $this->addSecurity(new Security('Fence', true, $this));
     }
 
@@ -61,11 +59,9 @@ class Enclosure
         if (!$this->isSecurityActive()) {
             throw new DinosaursAreRunningRampantException('Are you craaazy?!?');
         }
-
         if (!$this->canAddDinosaur($dinosaur)) {
             throw new NotABuffetException();
         }
-
         $this->dinosaurs->add($dinosaur);
     }
 
@@ -92,7 +88,16 @@ class Enclosure
 
     private function canAddDinosaur(Dinosaur $dinosaur): bool
     {
-        return count($this->dinosaurs) === 0 ||
-            $this->dinosaurs->first()->isCarnivorous() === $dinosaur->isCarnivorous();
+        return count($this->dinosaurs) === 0 || $this->dinosaurs->first()->isCarnivorous() === $dinosaur->isCarnivorous();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getDinosaurCount(): int
+    {
+        return $this->dinosaurs->count();
     }
 }
