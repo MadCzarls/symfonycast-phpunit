@@ -1,5 +1,5 @@
 {
-    "name": "madczarls/symfonycast-phpunit",
+    "name": "madczarls/symfonycasts-phpunit",
     "type": "project",
     "description": "Following https://symfonycasts.com/screencast/phpunit but on Symfony 5.3 and PHPUnit 9.5.",
     "license": "MIT",
